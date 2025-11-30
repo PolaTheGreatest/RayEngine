@@ -74,11 +74,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine.csproj",
+      "projectUniqueName": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine\\RayEngine.csproj",
       "projectName": "RayEngine",
-      "projectPath": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine.csproj",
+      "projectPath": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine\\RayEngine.csproj",
       "packagesPath": "C:\\Users\\super\\.nuget\\packages\\",
-      "outputPath": "C:\\Repositories\\C# Projects\\RayEngine\\obj\\",
+      "outputPath": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\super\\AppData\\Roaming\\NuGet\\NuGet.Config",

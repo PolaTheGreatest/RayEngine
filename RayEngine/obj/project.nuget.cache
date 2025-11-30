@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4ANM/VFED7A=",
+  "dgSpecHash": "xg2Zt+LNDgU=",
   "success": true,
-  "projectFilePath": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine.csproj",
+  "projectFilePath": "C:\\Repositories\\C# Projects\\RayEngine\\RayEngine\\RayEngine.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\super\\.nuget\\packages\\raylib-cs\\7.0.2\\raylib-cs.7.0.2.nupkg.sha512"
   ],
