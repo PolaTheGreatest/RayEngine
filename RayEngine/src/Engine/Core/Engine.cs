@@ -20,9 +20,7 @@ namespace RayEngine
 
         public SceneManager? SM;
 
-        public GameObject? player1;
-        public GameObject? player2;
-        public GameObject? player3;
+        public GameObject player1;
 
         private void Update(float dt)
         {
@@ -50,6 +48,11 @@ namespace RayEngine
                 30,
                 Color.Black
             );
+            Raylib.DrawText($"Current scene: {SM.currentSceneIndex}",
+                225,
+                130,
+                30,
+                Color.Black);
 
             SM.Draw();
 
@@ -67,21 +70,22 @@ namespace RayEngine
             // Target 60 fps max for now.
             Raylib.SetTargetFPS(60);
 
-            // Create test player objects
-            player1 = new(new Vector2(300.0f, 300.0f), 200.0f, 50.0f, Color.Red);
-            player2 = new(new Vector2(300.0f, 300.0f), 200.0f, 50.0f, Color.Blue);
-            player3 = new(new Vector2(600.0f, 200.0f), 200.0f, 50.0f, Color.Green);
+            player1 = new(
+                new Transform(
+                    new Vector2(350, 350),
+                    45.0f,
+                    new Vector2(5, 10)
+                ),
+                200.0f,
+                Color.Blue,
+                OBJECT_SHAPE.RECT
+            );
 
             // Create new scenes
-            gameScene1 = new(new List<GameObject>
-            {
+            gameScene1 = new(new List<GameObject> {
                 player1
             });
-            gameScene2 = new(new List<GameObject>
-            {
-                player2,
-                player3
-            });
+            gameScene2 = new(null);
 
             // Create a SceneManager
             SM = new(gameScene1);
@@ -93,6 +97,8 @@ namespace RayEngine
             while (_running && (!Raylib.WindowShouldClose()))
             {
                 float dt = Raylib.GetFrameTime();
+
+                player1.Transform.Rotation += 1.0f;
 
                 Update(dt);
                 Draw();
