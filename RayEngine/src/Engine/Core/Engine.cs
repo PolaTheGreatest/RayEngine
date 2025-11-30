@@ -94,6 +94,7 @@ namespace RayEngine
             // Swap to that scene.
             SM.SwitchTo(0);
 
+            // MAIN GAME LOOP
             while (_running && (!Raylib.WindowShouldClose()))
             {
                 float dt = Raylib.GetFrameTime();

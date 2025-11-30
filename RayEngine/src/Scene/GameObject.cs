@@ -28,11 +28,18 @@ namespace RayEngine
 	public class GameObject
 	{
 		public Transform Transform { get; private set; }
-		public Vector2 Velocity { get; private set; }
+		public Vector2 Velocity { get; protected set; }
 
 		private float Speed;
 		private Color Color;
 		private OBJECT_SHAPE Shape;
+
+		public bool Enabled { get; set; } = true;
+
+		public string Tag { get; set; } = "Untagged";
+		public int Layer { get; set; } = 0;
+
+		public Renderer Renderer = new();
 
 		public GameObject(Transform? initialTransform, float speed, Color color, OBJECT_SHAPE shape)
 		{
@@ -47,45 +54,44 @@ namespace RayEngine
 			this.Shape = shape;
 		}
 
-		public void Update(float dt)
+		public virtual void Start() { }
+
+		public virtual void Update(float dt)
 		{
 			this.Transform.Position += this.Velocity * this.Speed * dt;
 		}
 
-		public void Draw()
+		public virtual void LateUpdate(float dt) { }
+
+		public virtual void OnDestroy() { }
+
+		public virtual void Draw()
 		{
 			switch (this.Shape)
 			{
 				case OBJECT_SHAPE.CIRC:
-                    Raylib.DrawCircleV(
-						this.Transform.Position,
-						20.0f * this.Transform.Scale.Y,
-						this.Color
-					);
-					break;
+					Renderer.Draw2DCircle(
+                        this.Transform.Position,
+                        20.0f * this.Transform.Scale.Y,
+                        this.Color
+                    );
+                    break;
 				case OBJECT_SHAPE.RECT:
-     //               Raylib.DrawRectangleV(
-					//	this.Transform.Position,
-					//	new Vector2(20, 20) * this.Transform.Scale,
-					//	this.Color
-					//);
-					Raylib.DrawRectanglePro(
-						new Rectangle(
-							this.Transform.Position,
-							new Vector2(20, 20) * this.Transform.Scale
-
-						),
-						Vector2.Zero,
-						this.Transform.Rotation,
-						this.Color
-					);
-					break;
-				default:
-                    Raylib.DrawRectanglePro(
+					Renderer.Draw2DRect(
                         new Rectangle(
                             this.Transform.Position,
                             new Vector2(20, 20) * this.Transform.Scale
-
+                        ),
+                        Vector2.Zero,
+                        this.Transform.Rotation,
+                        this.Color
+                    );
+                    break;
+				default:
+                    Renderer.Draw2DRect(
+                        new Rectangle(
+                            this.Transform.Position,
+                            new Vector2(20, 20) * this.Transform.Scale
                         ),
                         Vector2.Zero,
                         this.Transform.Rotation,
@@ -94,16 +100,6 @@ namespace RayEngine
                     break;
 			}
         }
-
-		public void VelocityChange(Vector2 vel)
-		{
-			this.Velocity += vel;
-		}
-
-		public void ResetVelocity()
-		{
-			this.Velocity = Vector2.Zero;
-		}
 	}
 }
 

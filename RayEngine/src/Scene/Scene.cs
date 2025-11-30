@@ -37,13 +37,19 @@ namespace RayEngine
         public void Update(float dt)
         {
             foreach (GameObject obj in gameObjects)
+            {
+                if (!obj.Enabled) continue;
                 obj.Update(dt);
+            }
         }
 
         public void Draw()
         {
             foreach (GameObject obj in gameObjects)
+            {
+                if (!obj.Enabled) continue;
                 obj.Draw();
+            }
         }
 
         public void AddObject(GameObject obj)
