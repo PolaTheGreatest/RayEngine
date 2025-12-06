@@ -10,11 +10,11 @@ namespace RayEngine
 {
     public class Renderer
     {
-        public void Draw2DCircle(Vector2 Position, float Radius, Color Color)
+        public void DrawCircle(Vector2 Position, float Radius, Color Color)
         {
             Raylib.DrawCircleV(Position, Radius, Color);
         }
-        public void Draw2DRect(Rectangle Rect, Vector2 Origin, float Rotation, Color Color)
+        public void DrawRect(Rectangle Rect, Vector2 Origin, float Rotation, Color Color)
         {
             Raylib.DrawRectanglePro(Rect, Origin, Rotation, Color);
         }

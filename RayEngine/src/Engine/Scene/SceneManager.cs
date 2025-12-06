@@ -17,13 +17,13 @@ namespace RayEngine
             if (startingScene != null)
             {
                 AddScene(startingScene);
+                SwitchTo(0);
             }
         }
 
         public void AddScene(Scene scene)
         {
-            this.scenes.Add(scene);
-            Console.WriteLine(this.scenes.Count);
+            scenes.Add(scene);
         }
 
         public void SwitchTo(int index)
@@ -31,7 +31,7 @@ namespace RayEngine
             if (index < 0 || index >= scenes.Count)
             {
                 Console.WriteLine($"Index {index} is not within the range of scene count.");
-                Console.WriteLine($"Scene count is: {this.scenes.Count}.");
+                Console.WriteLine($"Scene count is: {scenes.Count}.");
                 return;
             }
 
@@ -44,16 +44,10 @@ namespace RayEngine
             scenes[currentSceneIndex]?.Load();
         }
 
-        public void Update(float dt)
+        public void Update(float dt, World world)
         {
             if (currentSceneIndex == -1) return;
-            scenes[currentSceneIndex]?.Update(dt);
-        }
-
-        public void Draw()
-        {
-            if (currentSceneIndex == -1) return;
-            scenes[currentSceneIndex]?.Draw();
+            scenes[currentSceneIndex]?.Update(dt, world);
         }
     }
 }

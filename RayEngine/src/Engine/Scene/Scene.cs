@@ -20,6 +20,29 @@ namespace RayEngine
             if (startingObjects != null)
             {
                 storedObjects.AddRange(startingObjects);
+                ToggleStoredObjects(false);
+            }
+        }
+
+        private void ToggleStoredObjects(bool toggle)
+        {
+            foreach (var gameObject in storedObjects)
+            {
+                if (gameObject != null)
+                {
+                    gameObject.Enabled = toggle;
+                }
+            }
+        }
+
+        private void ToggleActiveObjects(bool toggle)
+        {
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject != null)
+                {
+                    gameObject.Enabled = toggle;
+                }
             }
         }
 
@@ -27,28 +50,21 @@ namespace RayEngine
         {
             ClearSceneObjects();
             gameObjects.AddRange(storedObjects);
+            ToggleActiveObjects(true);
         }
 
         public void Unload()
         {
+            ToggleActiveObjects(false);
             ClearSceneObjects();
         }
 
-        public void Update(float dt)
+        public void Update(float dt, World world)
         {
             foreach (GameObject obj in gameObjects)
             {
                 if (!obj.Enabled) continue;
-                obj.Update(dt);
-            }
-        }
-
-        public void Draw()
-        {
-            foreach (GameObject obj in gameObjects)
-            {
-                if (!obj.Enabled) continue;
-                obj.Draw();
+                obj.Update(dt, world);
             }
         }
 
